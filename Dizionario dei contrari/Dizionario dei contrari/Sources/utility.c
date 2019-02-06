@@ -7,6 +7,7 @@
 //
 
 #include "utility.h"
+#include <stdio.h>
 
 void cleanBuffer(void){
     int ch;

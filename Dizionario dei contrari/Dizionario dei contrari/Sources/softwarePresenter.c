@@ -6,10 +6,11 @@
 //  Copyright © 2019 Roberto Vecchio. All rights reserved.
 //
 
-#include "presenter.h"
+#include "softwarePresenter.h"
 
-void doPresentation(char *software_name){
+void doPresentation(char *software_name, char *functionOne, char *functionTwo){
     printLogo(software_name);
+    printFunctionList(functionOne, functionTwo);
 }
 
 void printEqualLine(){
@@ -20,7 +21,7 @@ void printLogo(char *logo_name){
     printEqualLine();
     printf("=                                          =\n");
     printf("=  Benvenuto nel %s!  =\n", logo_name);
-    printf("=                                          =\n");
+    printf("=                                          =");
     printEqualLine();
 }
 

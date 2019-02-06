@@ -10,7 +10,7 @@
 #define presenter_h
 #include <stdio.h>
 
-void doPresentation(char *);
+void doPresentation(char *,char *, char *);
 void printEqualLine(void);
 void printLogo(char *);
 void printFunctionList(char *, char *);

@@ -8,7 +8,8 @@
 
 #ifndef utility_h
 #define utility_h
-void cleanBuffer();
-int calculateNumberOfElements();
+
+void cleanBuffer(void);
+int calculateNumberOfElements(void);
 
 #endif /* utility_h */
