@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		999E929322070F8B00AD7ABB /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 999E929222070F8B00AD7ABB /* main.c */; };
-		999E929F22079ECD00AD7ABB /* softwarePresenter.c in Sources */ = {isa = PBXBuildFile; fileRef = 999E929E22079ECD00AD7ABB /* softwarePresenter.c */; };
 		999E92B72209B98B00AD7ABB /* utility.c in Sources */ = {isa = PBXBuildFile; fileRef = 999E92B62209B98B00AD7ABB /* utility.c */; };
 		999E92C12209BEDB00AD7ABB /* dictionarylib.c in Sources */ = {isa = PBXBuildFile; fileRef = 999E92C02209BEDB00AD7ABB /* dictionarylib.c */; };
 /* End PBXBuildFile section */
@@ -28,8 +27,6 @@
 /* Begin PBXFileReference section */
 		999E928F22070F8B00AD7ABB /* Dizionario dei contrari */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Dizionario dei contrari"; sourceTree = BUILT_PRODUCTS_DIR; };
 		999E929222070F8B00AD7ABB /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		999E929D22079EBD00AD7ABB /* softwarePresenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = softwarePresenter.h; sourceTree = "<group>"; };
-		999E929E22079ECD00AD7ABB /* softwarePresenter.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = softwarePresenter.c; sourceTree = "<group>"; };
 		999E92B52209B97A00AD7ABB /* utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utility.h; sourceTree = "<group>"; };
 		999E92B62209B98B00AD7ABB /* utility.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = utility.c; sourceTree = "<group>"; };
 		999E92BF2209BEDB00AD7ABB /* dictionarylib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dictionarylib.h; sourceTree = "<group>"; };
@@ -77,7 +74,6 @@
 			children = (
 				999E92BF2209BEDB00AD7ABB /* dictionarylib.h */,
 				999E92B52209B97A00AD7ABB /* utility.h */,
-				999E929D22079EBD00AD7ABB /* softwarePresenter.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -87,7 +83,6 @@
 			children = (
 				999E929222070F8B00AD7ABB /* main.c */,
 				999E92B62209B98B00AD7ABB /* utility.c */,
-				999E929E22079ECD00AD7ABB /* softwarePresenter.c */,
 				999E92C02209BEDB00AD7ABB /* dictionarylib.c */,
 			);
 			path = Sources;
@@ -151,7 +146,6 @@
 			files = (
 				999E92B72209B98B00AD7ABB /* utility.c in Sources */,
 				999E92C12209BEDB00AD7ABB /* dictionarylib.c in Sources */,
-				999E929F22079ECD00AD7ABB /* softwarePresenter.c in Sources */,
 				999E929322070F8B00AD7ABB /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,6 +10,5 @@
 #define utility_h
 
 void cleanBuffer(void);
-int calculateNumberOfElements(void);
 
 #endif /* utility_h */

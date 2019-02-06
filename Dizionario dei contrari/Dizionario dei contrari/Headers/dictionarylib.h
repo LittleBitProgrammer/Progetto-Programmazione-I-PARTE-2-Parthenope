@@ -18,6 +18,7 @@
 #define MAX_CONTRARY_LENGHT 20
 
 #include <stdio.h>
+#include <string.h>
 
 /*    - definizione di nuovi tipi -    */
 
@@ -33,7 +34,9 @@ typedef struct word {
 
 /*    - prototipi di funzione -    */
 
-void initializesDictionarie(void);
+void resword(char *);
+void opphrase(char *);
+int arrcount(wordstruct *);
 
 
 #endif /* dictionarylib_h */
