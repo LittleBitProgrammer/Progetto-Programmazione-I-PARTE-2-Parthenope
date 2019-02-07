@@ -203,10 +203,10 @@ void resword(char *word_searched){
         
         if (strcmp(word_searched, dictionary_words[i].name) == 0) {
             
-            printf("Il significato della parola cercata è: \n%s\n",dictionary_words[i].meaning);
-            printf("Il contrario della parola cercata è: \n");
+            printf("\nIl significato della parola cercata è: \n%s\n",dictionary_words[i].meaning);
+            printf("\nIl contrario della parola cercata è: \n\n");
             
-            for (j=0; j< 5; j++) {
+            for (j=0; j< 5 && strlen(dictionary_words[i].contrary[j]) > 0; j++) {
                 printf("%d. %s\n", j+1, dictionary_words[i].contrary[j]);
             }
             
@@ -224,13 +224,14 @@ void opphrase(char *phrase){
     
     token = strtok(phrase, separators);
     
-    printf("============================================\n\n");
+    printf("<------------------------------------------------->\n\n");
     
     while (token != NULL) {
         words[i++] = strdup(token);
         token = strtok(NULL," \n");
     }
     
+    printf("La tua frase al contrario e':\n");
     for (k = 0; k < i; k++) {
         for (j = 0; j < struct_lenght; j++) {
             if (strcmp(words[k], dictionary_words[j].name) == 0) {

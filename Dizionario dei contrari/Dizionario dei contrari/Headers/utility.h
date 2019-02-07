@@ -10,5 +10,6 @@
 #define utility_h
 
 void cleanBuffer(void);
+void pntlogo(void);
 
 #endif /* utility_h */
