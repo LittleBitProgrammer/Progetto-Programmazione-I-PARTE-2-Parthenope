@@ -6,9 +6,41 @@
 //  Copyright © 2019 Roberto Vecchio. All rights reserved.
 //
 
+                                                                /* - Scopo della libreria - */
+                                                           /*-----------------------------------*/
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+                                                               -----------------------------
+                                                       |---->  |       dictionarylib.c     |  <----|
+                                                               -----------------------------
+ 
+ La libreria in questione nasce con lo scopo di semplificare le operazioni che il dizionario virtuale deve eseguire durante il suo normale utilizzo.
+ 
+ -------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+                                                            /* - Inclusione header file - */
+                                                        /*-----------------------------------*/
 #include "dictionarylib.h"
 
-/* - inizializzazione struct - */
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ Inizializzo un array bidimensionale del tipo wordstruct (definito in dictionarylib.h) utile per rappresentare il concetto di "parola di un dizionario" nel contesto del
+ software in questione e per applicare su di essi diverse operazioni definite dalle funzioni/procedure presenti nella libreria.
+ 
+ Ho deciso di utilizzare un array bidimensionale piuttosto che un monodimensionale per ottimizzare la ricerca e non scorrere tutto l'array ogni volta che questa operazione
+ viene eseguita.
+ 
+ Per semplificare la lettura del codice della libreria di seguito le variabili che definiscono una singola struttura wordstruct :
+ 
+ {
+ - parola [lunghezza massima parola]
+ - significato parola [lunghezza massima del significato]
+ - array di contrari [massimo numero di contrari][massima lunghezza di un contrario]
+ }
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 static wordstruct dictionary_words[NUMBERS_OF_LETTERS][MAX_WORD_FOR_LETTER] = {
     
@@ -247,18 +279,45 @@ static wordstruct dictionary_words[NUMBERS_OF_LETTERS][MAX_WORD_FOR_LETTER] = {
 };
 
 
-/* - function - */
+                                                                  /* - Funzioni - */
+                                                        /*-----------------------------------*/
+
+
+
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ * nome:        resword
+ 
+ * input:       - array monodimensionale di caratteri (stringa)
+ 
+ * output:      ricerca parola corrispondente a quella cercata e ne stampa il significato e i suoi contrari
+ 
+ * descrizione: procedura che accetta in input una stringa e cerca quella corrispondente nell'array bidimensionale di wordstruct mostrandone significato e lista dei
+                contrari, se non è presente nell'array allora non mostra le precedenti informazioni
+ 
+ * versione:    2.0
+ -------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 void resword(char *word_searched){
+    //indici dei cicli fot
     int i,j;
+    //indice di riga nell'array bidimensionale di wordstruct
     int index_f_letter = returnLetIndex(word_searched[0]);
     
+    //gli elementi per ogni riga al massimo possono essere 5
     for (i = 0; i < MAX_WORD_FOR_LETTER; i++) {
         
+        //lo strcmp compara due stringhe e restituisce 0 se queste sono uguali
+        //quindi se lo strcmp tra la parola cercata e la variabile name della struct alla riga "index_f_letter" e al momento iesimo è uguale a 0, allora le due parole
+        //sono uguali
         if (strcmp(word_searched, dictionary_words[index_f_letter][i].name) == 0) {
             
+            //quindi siamo nel caso in cui le due parole sono uguali
+            //stampa prima il suo significato
             printf("\nIl significato della parola cercata è: \n%s\n",dictionary_words[index_f_letter][i].meaning);
             printf("\nIl contrario della parola cercata è: \n\n");
             
+            //utilizza un secondo ciclo for per stampare la lista dei suoi contrari
+            //per evitare scorrere l'array più del dovuto, il for scorrerà fino a quando la lunghezza del contrario sarà maggiore di 0, altrimenti quel campo è vuoto
+            //ed il ciclo for smette di iterare
             for (j=0; j< 5 && strlen(dictionary_words[index_f_letter][i].contrary[j]) > 0; j++) {
                 printf("%d. %s\n", j+1, dictionary_words[index_f_letter][i].contrary[j]);
             }
@@ -268,32 +327,71 @@ void resword(char *word_searched){
     }
 }
 
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ * nome:        opphrase
+ 
+ * input:       - array monodimensionale di caratteri (stringa)
+ 
+ * output:      ricerca il contrario della frase data in input
+ 
+ * descrizione: procedura che accetta in input una stringa e stampa a video il suo esatto contrario (i contrari fanno riferimento alle parole presenti nell'array
+                bidimensionale di wordstruct)
+ 
+ * versione:    2.0
+ -------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 void opphrase(char *phrase){
+    /*-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     
+     indici:
+     
+     - i    -> indice while
+     - k,j  -> indici di for
+     
+     -------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
     int i = 0, k, j;
+    
+    //indice di riga nell'array bidimensionale di wordstruct non inizializzato
     int index_f_letter;
+    
+    //variabile necesaria dividere la frase in parole
     char *token;
+    
+    //array di stringhe per memorizzare la lista delle parole spacchettate dalla frase attraverso la funzione strtok
     char *words[200];
+    
+    //array di separatori utili a capire secondo quale carattere la frase deve essere divisa in parole
     char separators[] = {' ','\0','\t','\n'};
     
+    //strtok provvede a dividere una frase in parole dati in input una frase e dei separatori
     token = strtok(phrase, separators);
     
     printf("<------------------------------------------------->\n\n");
     
+    //fino a quando token non è nullo continua a duplicare con stdrup token nell'array words al momento iesimo e incrementa i
     while (token != NULL) {
         words[i++] = strdup(token);
         token = strtok(NULL," \n");
     }
     
     printf("La tua frase al contrario e':\n");
+    
+    //stampa della frase al contrario
     for (k = 0; k < i; k++) {
         for (j = 0; j < MAX_WORD_FOR_LETTER; j++) {
             
+            //indice di riga nell'array bidimensionale di wordstruct inizializzato
             index_f_letter = returnLetIndex(words[k][0]);
             
+            //lo strcmp compara due stringhe e restituisce 0 se queste sono uguali
+            //quindi se lo strcmp tra la parola al momento k e la variabile name della struct alla riga "index_f_letter" e al momento jesimo è uguale a 0,
+            //allora le due parole sono uguali
             if (strcmp(words[k], dictionary_words[index_f_letter][j].name) == 0) {
+                
+                //nel caso siano uguali copia in words al momento k il suo contrario
                 strcpy(words[k], dictionary_words[index_f_letter][j].contrary[0]);
             }
         }
+        //quindi per ogni words al momento k stampa la parola con uno spazio
         printf("%s ", words[k]);
     }
     
@@ -301,6 +399,18 @@ void opphrase(char *phrase){
 }
 
 
+/* -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ * nome:        returnLetIndex
+ 
+ * input:       - un carattere
+ 
+ * output:      ritorna l'indice alfabetico della lettera
+ 
+ * descrizione: funzione che dato in input un carattere restituisce l'indice alfabetico di quest'ultimo, la funzione viene spesso utilizzata per assegnare ad una variabile
+                l'indice di riga della parola cercata.
+ 
+ * versione:    1.0
+ -------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 alphabet_index returnLetIndex(char letter){
     
     switch (letter) {
